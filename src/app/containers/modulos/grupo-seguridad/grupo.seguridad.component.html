@@ -1,0 +1,145 @@
+<div class="container">
+    <h5>Lista de modulos</h5>
+
+    <c-row class="mt-3">
+        <c-col xs>
+            <table [hover]="false" [responsive]="true" [striped]="false" align="middle"
+            cTable borderless class="border bg-white">
+                <thead cTableColor="info">
+                    <tr class="border-bottom">
+                        <th>
+                            <c-form-check>
+                                <input cFormCheckInput id="selectAll" type="checkbox" (click)="selectAll()" />
+                            </c-form-check>
+                        </th>
+                        <td>
+                            <svg cIcon name="cil-trash" size="md" title="Delete users Icon"></svg>
+                        </td>
+                        <th class="text-center">No</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let group of groups">
+                        <td class="text-center">
+                            <c-form-check>
+                                <input cFormCheckInput [(ngModel)]="group.select" [value]="group.no" id="select" type="checkbox" />
+                            </c-form-check>
+                        </td>
+                        <td>
+                            <svg cIcon name="cilTrash" size="md" title="Delete users Icon"></svg>
+                        </td>
+                        <td class="text-center">{{ group.no }}</td>
+                        <td class="text-center">{{ group.nombre }}</td>
+                    </tr>
+                </tbody>
+                <tfoot cTableColor="info">
+                    <tr>
+                        <td>
+                            <c-form-check>
+                                <input cFormCheckInput type="checkbox" (click)="selectAll()"/>
+                            </c-form-check>
+                        </td>
+                        <td>
+                            <button class="btn">
+                                <svg cIcon name="cil-trash" size="md" title="Delete users Icon"></svg>
+                                Eliminar
+                            </button>
+                        </td>
+                        <td class="text-end">
+                            <button class="btn">
+                                <svg cIcon name="cil-user-plus" size="md" title="Add users Icon"></svg>
+                                Nuevo usuario
+                            </button>
+                        </td>
+                        <td class="text-end">
+                            <button class="btn" (click)="toggleLiveDemo()">
+                                <svg cIcon name="cil-plus" size="md" title="Add users Icon"></svg>
+                                Agregar usuarios
+                            </button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </c-col>
+    </c-row>
+</div>
+
+<c-modal size="xl" [visible]="visible" (visibleChange)="openModal($event)">
+    <c-modal-header>
+      <h5 cModalTitle>Agregar usuarios</h5>
+      <button (click)="toggleLiveDemo()" cButtonClose class="btn">
+        <svg cIcon name="cil-x" size="md" title="Delete users Icon"></svg>
+      </button>
+    </c-modal-header>
+    <c-modal-body>
+        <c-alert *ngIf="show" color="success">Usuario agregado con exito!</c-alert>
+        <div class="mb-4">
+            <span>Nombre: </span>
+            <input class="mx-3" [(ngModel)]="filter" type="text" maxlength="50">
+            <button class="btn">
+                <svg cIcon name="cil-task" size="lg" title="search users Icon"></svg>
+            </button>
+        </div>
+
+        <h5>Lista de usuarios</h5>
+        <table [hover]="false" [responsive]="true" [striped]="false" align="middle"
+            cTable borderless class="border bg-white">
+                <thead cTableColor="info">
+                    <tr class="border-bottom">
+                        <th class="text-center">No</th>
+                        <th class="text-center">Tipo usuario</th>
+                        <th class="text-center">Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users | userFilter: filter">
+                        <td class="text-center">
+                            <c-form-check>
+                                <input cFormCheckInput [(ngModel)]="user.select" [value]="user.no" type="checkbox" />
+                            </c-form-check>
+                            <span class="ms-2">{{ user.no }}</span>
+                        </td>
+                        <td class="text-center">{{ user.tipo == 'Alumno' ? 'A' : 'E' }}</td>
+                        <td class="text-center">{{ user.apellidos }} {{ user.nombre }}</td>
+                    </tr>
+                </tbody>
+                <tfoot cTableColor="info">
+                    <tr>
+                        <td class="text-end" colspan="3">
+                            <button class="btn" (click)="addUser()">
+                                <svg cIcon name="cil-plus" size="md" title="Add users Icon"></svg>
+                                Asignar usuarios
+                            </button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <c-pagination class="d-flex justify-content-center" aria-label="Page navigation example">
+                <li cPageItem>
+                    <a cPageLink [routerLink]>1</a>
+                </li>
+                <li cPageItem>
+                    <a cPageLink [routerLink]>2</a>
+                </li>
+                <li cPageItem>
+                    <a cPageLink [routerLink]>3</a>
+                </li>
+                <li cPageItem>
+                    <a cPageLink [routerLink]>4</a>
+                </li>
+                <li cPageItem>
+                    <a cPageLink [routerLink]>5</a>
+                </li>
+                <li cPageItem>
+                    <a cPageLink [routerLink]>6</a>
+                </li>
+                <li cPageItem>
+                    <a cPageLink [routerLink]>7</a>
+                </li>  
+                <li cPageItem>
+                    <a cPageLink [routerLink]>8</a>
+                </li> 
+            </c-pagination>
+    </c-modal-body>
+</c-modal>
