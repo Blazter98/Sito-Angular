@@ -4,6 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { ModulosRoutingModule } from './modulos.routing.module';
 import { DocsComponentsModule } from '@docs-components/docs-components.module';
+import { AbcModulosComponent } from './abc-modulos/abc-modulos.component';
+import { GrupoSeguridadComponent } from './grupo-seguridad/grupo.seguridad.component';
+import { AsignarGruposComponent } from './asignar-grupos/asignar-grupos.component';
 
 import { 
   TableModule, 
@@ -11,17 +14,22 @@ import {
   FormModule,
   ModalModule,
   PaginationModule,
-  AlertModule
+  AlertModule,
+  NavModule,
+  BadgeModule,
 } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 
-import { GrupoSeguridadComponent } from './grupo-seguridad/grupo.seguridad.component';
 import { UserPipe } from '../../core/user.pipe';
+import { ReporteTutoresAsignadosComponent } from './reporte-tutores-asignados/reporte-tutores-asignados.component';
 
 @NgModule({
   declarations: [
     GrupoSeguridadComponent,
-    UserPipe
+    UserPipe,
+    AbcModulosComponent,
+    AsignarGruposComponent,
+    ReporteTutoresAsignadosComponent
   ],
   imports: [
     CommonModule,
@@ -35,6 +43,9 @@ import { UserPipe } from '../../core/user.pipe';
     ModalModule,
     PaginationModule,
     AlertModule,
+    NavModule,
+    BadgeModule,
+    
     DocsComponentsModule
   ]
 })

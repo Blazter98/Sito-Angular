@@ -14,7 +14,6 @@ export class GrupoSeguridadComponent implements OnInit {
   visible = false;
   show = false;
   filter = ''
-  icons!: [string, string[]][];
 
   constructor(private iconSet: IconSetService){
     this.iconSet.icons = { ...freeSet };

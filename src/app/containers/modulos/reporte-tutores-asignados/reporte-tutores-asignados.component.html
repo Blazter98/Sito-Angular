@@ -1,0 +1,41 @@
+<div class="row pt-2">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="d-block">Tutores Asignados</h5>
+        <div class="bg-white rounded px-2 shadow-sm">
+            <img cImg thumbnail height="80" src="assets/img/uta.png" alt="">
+        </div>
+    </div>
+
+    <c-nav class="justify-content-end mt-2">
+        <select cSelect [(ngModel)]="filter" (change)="getTutors($event)" class="me-2" style="width: 250px;">
+            <option>Seleccionar</option>
+            <option value="Agosto - Diciembre 2021">Agosto - Diciembre 2021</option>
+            <option value="Abril - Agosto 2022">Abril - Agosto 2022</option>
+            <option value="Enero - Abril 2023">Enero - Abril 2023</option>
+        </select>
+
+        <button *ngIf="!isPrint" class="btn btn-info text-white" (click)="print()">
+            <svg cIcon name="cil-print" size="lg" title="print"></svg>
+            <p class="my-0">Imprimir</p>
+        </button>
+    </c-nav>
+
+    <table cTable borderless [responsive]="true" [striped]="true" align="middle" class="border bg-white mt-4">
+        <thead cTableColor="success">
+            <tr class="border-bottom">
+                <th class="text-center">No</th>
+                <th class="text-center">Tutor</th>
+                <th class="text-center">Grupo</th>
+                <th class="text-center">Carrera</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tutor of tutors">
+                <td class="text-center">{{ tutor.no }}</td>
+                <td class="text-center">{{ tutor.nombre }}</td>
+                <td class="text-center">{{ tutor.grupo }}</td>
+                <td class="text-center">{{ tutor.carrera }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

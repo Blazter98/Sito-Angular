@@ -1,0 +1,125 @@
+<div class="container px-2 pt-4">
+    <c-nav class="justify-content-end">
+        <button class="btn border me-2" (click)="moduleForm.reset()">
+            <svg cIcon name="cil-ban" size="md" title="ban"></svg>
+        </button>
+        <button class="btn border me-2" (click)="addModule(moduleForm.value)">
+            <svg cIcon name="cil-save" size="md" title="save"></svg>
+        </button>
+        <button class="btn border me-2">
+            <svg cIcon name="cil-trash" size="md" title="trash"></svg>
+        </button>
+        <button class="btn border" (click)="toggleLiveDemo()">
+            <svg cIcon name="cil-search" size="md" title="search"></svg>
+        </button>
+    </c-nav>
+
+    <h6 class="text-title ms-1">Actualizar modulo</h6><hr>
+    <div class="mb-4">
+        <form cForm [formGroup]="moduleForm" class="module-form">
+            <div class="mb-3">
+                <label cLabel>Clave</label>
+                <input cFormControl formControlName="no" type="number" min="0" maxlength="5">
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label cLabel>Modulo padre <span class="text-danger">*</span> </label>
+                    <select cSelect cFormControl formControlName="moduloPadre">
+                        <option>Seleccionar</option>
+                        <option value="Modulo 1">Modulo 1</option>
+                        <option value="Modulo 2">Modulo 2</option>
+                        <option value="Modulo 3">Modulo 3</option>
+                        <option value="Modulo 4">Modulo 4</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label cLabel>Nombre <span class="text-danger">*</span> </label>
+                    <input cFormControl formControlName="nombre" type="text" maxlength="50">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label cLabel>Ruta <span class="text-danger">*</span> </label>
+                    <input cFormControl formControlName="ruta" type="text" maxlength="50">
+                </div>
+                <div class="col-6">
+                    <label cLabel>Orden <span class="text-danger">*</span> </label>
+                    <select cSelect cFormControl formControlName="orden">
+                        <option>Seleccionar</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                    </select>
+                </div>
+            </div>
+            <div class="d-flex">
+                <c-form-check class="me-5">
+                    <input cFormCheckInput formControlName="visible" class="mt-1" type="checkbox"/>
+                    <label cFormCheckLabel>Visible</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput formControlName="estado" class="mt-1" type="checkbox"/>
+                    <label cFormCheckLabel>Activo</label>
+                </c-form-check>
+            </div>
+        </form>
+    </div>
+</div>
+
+<c-modal size="xl" [visible]="visible" (visibleChange)="openModal($event)">
+    <c-modal-header>
+        <h6 cModalTitle class="text-title ms-1">Busqueda por nombre</h6><hr>
+        <button (click)="toggleLiveDemo()" cButtonClose class="btn">
+            <svg cIcon name="cil-x" size="md" title="close users Icon"></svg>
+        </button>
+    </c-modal-header>
+    <c-modal-body>
+        <!-- <c-alert *ngIf="show" color="success">Usuario agregado con exito!</c-alert> -->
+        <div class="mb-4">
+            <span>Nombre: </span>
+            <input class="mx-3" [(ngModel)]="filter" type="text" maxlength="50">
+            <button class="btn btn-outline-success btn-small">Buscar</button>
+        </div>
+
+        <h6>Resultados encontrados</h6>
+        <table [hover]="false" [responsive]="true" [striped]="false" align="middle"
+        cTable borderless class="border bg-white">
+            <thead cTableColor="info">
+                <tr class="border-bottom">
+                    <th class="text-center">No</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Orden</th>
+                    <th class="text-center">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let grupo of grupos | userFilter: filter">
+                    <td class="text-center">{{ grupo.no }}</td>
+                    <td class="text-center">{{ grupo.nombre }}</td>
+                    <td class="text-center">{{ grupo.orden }}</td>
+                    <td class="text-center">
+                        <c-badge [ngClass]="{'bg-success' : grupo.estado == true,
+                        'bg-danger': grupo.estado == false}">
+                            {{ grupo.estado == true ? 'Activo' : 'Inactivo' }}
+                        </c-badge>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <c-pagination class="d-flex justify-content-center" aria-label="Page navigation example">
+            <li cPageItem>
+                <a cPageLink [routerLink]>1</a>
+            </li>
+            <li cPageItem>
+                <a cPageLink [routerLink]>2</a>
+            </li>
+            <li cPageItem>
+                <a cPageLink [routerLink]>3</a>
+            </li>
+            <li cPageItem>
+                <a cPageLink [routerLink]>4</a>
+            </li>
+        </c-pagination>
+    </c-modal-body>
+</c-modal>
