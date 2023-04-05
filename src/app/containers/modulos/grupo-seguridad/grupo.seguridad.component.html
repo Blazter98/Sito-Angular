@@ -27,7 +27,9 @@
                             </c-form-check>
                         </td>
                         <td>
-                            <svg cIcon name="cilTrash" size="md" title="Delete users Icon"></svg>
+                            <button class="btn" (click)="deleteGroup(group.no)">
+                                <svg cIcon name="cilTrash" size="md" title="Delete users Icon"></svg>
+                            </button>
                         </td>
                         <td class="text-center">{{ group.no }}</td>
                         <td class="text-center">{{ group.nombre }}</td>
@@ -41,7 +43,7 @@
                             </c-form-check>
                         </td>
                         <td>
-                            <button class="btn">
+                            <button class="btn" (click)="deleteAllGroup()">
                                 <svg cIcon name="cil-trash" size="md" title="Delete users Icon"></svg>
                                 Eliminar
                             </button>

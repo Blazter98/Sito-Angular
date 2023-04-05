@@ -177,7 +177,29 @@ export class GrupoSeguridadComponent implements OnInit {
   }
 
   addUser(){
+    this.users.forEach((user, index) => {
+      if(user.select == true){
+        const addUser = user;
+        addUser.select = false;
+        this.groups.push(user);
+        this.users[index].select = false;
+      }
+    })
+
     this.show = !this.show;
     setTimeout(() => { this.show = !this.show }, 3000)
+  }
+
+  deleteGroup(id: number){
+    this.groups = this.groups.filter(g => g.no != id);
+  }
+
+  deleteAllGroup(){
+    const newArray = [];
+    for(const group of this.groups){
+      if(group.select == false) newArray.push(group);
+    }
+
+    this.groups = newArray;
   }
 }
