@@ -15,7 +15,7 @@
     </c-nav>
 
     <h6 class="text-title ms-1">Actualizar modulo</h6><hr>
-    <div class="mb-4">
+    <div class="mb-5">
         <form cForm [formGroup]="moduleForm" class="module-form">
             <div class="mb-3">
                 <label cLabel>Clave</label>
@@ -64,6 +64,39 @@
                 </c-form-check>
             </div>
         </form>
+    </div>
+
+    <div *ngIf="grupTable.length > 0">
+        <table [hover]="false" [responsive]="true" [striped]="false" align="middle"
+        cTable borderless class="border bg-white">
+            <thead cTableColor="info">
+                <tr class="border-bottom">
+                    <th></th>
+                    <th class="text-center">No</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Orden</th>
+                    <th class="text-center">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let g of grupTable">
+                    <td>
+                        <button class="btn btn-outline-danger" (click)="delete(g.no)">
+                            <svg cIcon name="cil-trash" size="md" title="Delete users Icon"></svg>
+                        </button>
+                    </td>
+                    <td class="text-center">{{ g.no }}</td>
+                    <td class="text-center">{{ g.nombre }}</td>
+                    <td class="text-center">{{ g.orden }}</td>
+                    <td class="text-center">
+                        <c-badge [ngClass]="{'bg-success' : g.estado == true,
+                        'bg-danger': g.estado == false}">
+                            {{ g.estado == true ? 'Activo' : 'Inactivo' }}
+                        </c-badge>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 

@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AbcModulosComponent implements OnInit {
   moduleForm: FormGroup;
   grupos: any[] = [];
+  grupTable: any[] = [];
   visible = false;
   filter = '';
 
@@ -111,8 +112,13 @@ export class AbcModulosComponent implements OnInit {
   addModule(data: any){
     if(this.moduleForm.valid){
       this.grupos.push(data);
+      this.grupTable.push(data);
       this.moduleForm.reset();
     }
+  }
+
+  delete(id: number){
+    this.grupTable = this.grupTable.filter(g => g.no != id);
   }
 
   openModal(event: any) {
